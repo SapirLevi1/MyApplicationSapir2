@@ -58,7 +58,9 @@ class AllItemsFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                TODO("Not yet implemented")
+                ItemManager.remove(viewHolder.adapterPosition)
+
+                binding.recycler.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
             }
         }).attachToRecyclerView(binding.recycler)
 
