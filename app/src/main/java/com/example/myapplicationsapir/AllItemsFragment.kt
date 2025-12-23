@@ -39,7 +39,18 @@ class AllItemsFragment : Fragment() {
             Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
         }
 
-        binding.recycler.adapter = ItemAdapter(ItemManager.items)
+        binding.recycler.adapter = ItemAdapter(ItemManager.items, object : ItemAdapter.ItemListener {
+            override fun onItemClicked(index: Int) {
+
+                Toast.makeText(requireContext(),
+                    "${ItemManager.items[index]}",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onItemLongClicked(index: Int) {
+                ItemManager.remove(index)
+                binding.recycler.adapter!!.notifyItemRemoved(index)
+            }
+        })
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         ItemTouchHelper(object : ItemTouchHelper.Callback(){
@@ -59,7 +70,6 @@ class AllItemsFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 ItemManager.remove(viewHolder.adapterPosition)
-
                 binding.recycler.adapter!!.notifyItemRemoved(viewHolder.adapterPosition)
             }
         }).attachToRecyclerView(binding.recycler)
