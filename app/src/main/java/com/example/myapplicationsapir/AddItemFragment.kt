@@ -10,9 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplicationsapir.databinding.AddItemLayoutBinding
 
 class AddItemFragment : Fragment() {
-
     private var _binding : AddItemLayoutBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,7 +23,7 @@ class AddItemFragment : Fragment() {
         binding.finishBtn.setOnClickListener {
             val bundle = bundleOf("title" to binding.itemTitle.text.toString(),
                 "description" to binding.itemDescription.text.toString())
-            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment,bundle)
         }
 
         return  binding.root
