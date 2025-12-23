@@ -5,7 +5,7 @@ data class Item(val title:String, val description:String, val image: String?)
 object ItemManager {
     val items : MutableList<Item> = mutableListOf()
 
-    fun addItem(item: Item) {
+    fun add(item: Item) {
         items.add(item)
     }
 

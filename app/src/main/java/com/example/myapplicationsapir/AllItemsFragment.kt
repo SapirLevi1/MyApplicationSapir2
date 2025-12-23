@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplicationsapir.databinding.AllItemsLayoutBinding
 
 class AllItemsFragment : Fragment() {
@@ -37,6 +40,27 @@ class AllItemsFragment : Fragment() {
         }
 
         binding.recycler.adapter = ItemAdapter(ItemManager.items)
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+
+        ItemTouchHelper(object : ItemTouchHelper.Callback(){
+
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) = makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                TODO("Not yet implemented")
+            }
+        }).attachToRecyclerView(binding.recycler)
 
     }
 
