@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="30dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DetailItemFragment"
     android:background="#ba00"> //#cacb
 
     <androidx.cardview.widget.CardView
