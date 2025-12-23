@@ -35,7 +35,17 @@ class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
         fun bind(item: Item) {
             binding.itemTitle.text = item.title
             binding.itemDescription.text = item.description
+
             //TODO:Load the image
+
+            if (item.imageUri != null) {
+                // If it does, load the image from the URI
+                binding.itemImage.setImageURI(item.imageUri)
+            } else {
+                // Otherwise, show the default placeholder image
+                binding.itemImage.setImageResource(R.mipmap.ic_launcher)
+            }
+
         }
 
     }

@@ -1,6 +1,8 @@
 package com.example.myapplicationsapir
 
-data class Item(val title:String, val description:String, val image: String?)
+import android.net.Uri
+
+data class Item(val title:String, val description:String, val imageUri: Uri?) //image: String?
 
 object ItemManager {
     val items : MutableList<Item> = mutableListOf()
