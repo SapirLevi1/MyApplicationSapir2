@@ -35,6 +35,9 @@ class AllItemsFragment : Fragment() {
         arguments?.getString("title")?.let {
             Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
         }
+
+        binding.recycler.adapter = ItemAdapter(ItemManager.items)
+
     }
 
     override fun onDestroyView() {
