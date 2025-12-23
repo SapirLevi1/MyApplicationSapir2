@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplicationsapir.databinding.ItemLayoutBinding
 
 class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
@@ -35,16 +36,16 @@ class ItemAdapter(val items: List<Item>, val callBack: ItemListener)
         fun bind(item: Item) {
             binding.itemTitle.text = item.title
             binding.itemDescription.text = item.description
+            //binding.itemImage.setImageUri(Uri.parse(item.imageUri))
+            Glide.with(binding.root).load(item.imageUri).circleCrop().into(binding.itemImage)
 
             //TODO:Load the image
 
-            if (item.imageUri != null) {
-                // If it does, load the image from the URI
-                binding.itemImage.setImageURI(item.imageUri)
-            } else {
-                // Otherwise, show the default placeholder image
-                binding.itemImage.setImageResource(R.mipmap.ic_launcher)
-            }
+//            if (item.imageUri != null) {
+//                binding.itemImage.setImageURI(item.imageUri)
+//            } else {
+//                binding.itemImage.setImageResource(R.mipmap.ic_launcher)
+//            }
 
         }
 
