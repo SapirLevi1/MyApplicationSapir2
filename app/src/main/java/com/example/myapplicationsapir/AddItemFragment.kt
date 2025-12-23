@@ -43,7 +43,8 @@ class AddItemFragment : Fragment() {
                 binding.itemDescription.text.toString(),imageUri)//null //imageUri.toString()
             ItemManager.add(item)
 
-            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment)
+            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment
+                ,bundleOf("item" to item))
         }
 
         binding.imageBtn.setOnClickListener {
