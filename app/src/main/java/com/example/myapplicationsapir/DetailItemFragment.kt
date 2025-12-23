@@ -24,6 +24,13 @@ class DetailItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.getInt("item")?.let {
+            val item = ItemManager.items[it]
+            binding.itemTitle.text = item.title
+            binding.itemDesc.text = item.description
+            Glide.with(requireContext()).load(item.imageUri).circleCrop()
+                .into(binding.itemImage)
+        }
     }
 
     override fun onDestroyView() {

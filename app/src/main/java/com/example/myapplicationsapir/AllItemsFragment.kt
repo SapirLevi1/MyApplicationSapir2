@@ -47,8 +47,8 @@ class AllItemsFragment : Fragment() {
             }
 
             override fun onItemLongClicked(index: Int) {
-                ItemManager.remove(index)
-                binding.recycler.adapter!!.notifyItemRemoved(index)
+                findNavController().navigate(R.id.action_allItemsFragment_to_detailItemFragment
+                    ,bundleOf("item" to index))
             }
         })
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
