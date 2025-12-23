@@ -47,8 +47,7 @@ class AllItemsFragment : Fragment() {
             }
 
             override fun onItemLongClicked(index: Int) {
-                findNavController().navigate(R.id.action_allItemsFragment_to_detailItemFragment
-                    ,bundleOf("item" to index))
+                findNavController().navigate(R.id.action_allItemsFragment_to_detailItemFragment)
             }
         })
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
