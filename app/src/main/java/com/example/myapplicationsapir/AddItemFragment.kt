@@ -40,7 +40,7 @@ class AddItemFragment : Fragment() {
 //            val bundle = bundleOf("title" to binding.itemTitle.text.toString(), "description" to binding.itemDescription.text.toString())
 //            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment,bundle)
             val item = Item(binding.itemTitle.text.toString(),
-                binding.itemDescription.text.toString(),imageUri)//null //imageUri.toString()
+                binding.itemDescription.text.toString(),imageUri.toString())//null //imageUri.toString()
             ItemManager.add(item)
 
             findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment

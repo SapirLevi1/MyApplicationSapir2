@@ -6,7 +6,7 @@
     android:padding="30dp"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DetailItemFragment"
-    android:background="#ba00"> //#cacb
+    android:background="#aa00">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

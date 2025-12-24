@@ -3,8 +3,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import android.net.Uri
 import java.io.Serializable
-
-data class Item(val title:String, val description:String, val imageUri: Uri?)
+@Parcelize
+data class Item(val title:String, val description:String, val imageUri: String?) : Parcelable //Uri?
 
 
 object ItemManager {

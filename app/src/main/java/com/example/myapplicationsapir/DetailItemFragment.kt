@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.myapplicationsapir.databinding.DetailItemLayoutBinding
 
 class DetailItemFragment : Fragment() {
@@ -26,6 +27,7 @@ class DetailItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getInt("item")?.let {
             val item = ItemManager.items[it]
+
             binding.itemTitle.text = item.title
             binding.itemDesc.text = item.description
             Glide.with(requireContext()).load(item.imageUri).circleCrop()
