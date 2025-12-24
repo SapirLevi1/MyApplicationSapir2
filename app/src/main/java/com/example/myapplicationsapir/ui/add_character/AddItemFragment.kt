@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir
+package com.example.myapplicationsapir.ui.add_character
 
 import android.content.Intent
 import android.net.Uri
@@ -11,6 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplicationsapir.R
+import com.example.myapplicationsapir.data.model.Item
+import com.example.myapplicationsapir.data.model.ItemManager
 import com.example.myapplicationsapir.databinding.AddItemLayoutBinding
 
 class AddItemFragment : Fragment() {
@@ -22,7 +25,7 @@ class AddItemFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.OpenDocument()) {
             if(it != null) {
                 binding.resultImage.setImageURI(it)
-                requireActivity().contentResolver.takePersistableUriPermission(it,Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                requireActivity().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 imageUri = it
             }
 
@@ -39,12 +42,16 @@ class AddItemFragment : Fragment() {
         binding.finishBtn.setOnClickListener {
 //            val bundle = bundleOf("title" to binding.itemTitle.text.toString(), "description" to binding.itemDescription.text.toString())
 //            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment,bundle)
-            val item = Item(binding.itemTitle.text.toString(),
-                binding.itemDescription.text.toString(),imageUri.toString())//null //imageUri.toString()
+            val item = Item(
+                binding.itemTitle.text.toString(),
+                binding.itemDescription.text.toString(), imageUri.toString()
+            )//null //imageUri.toString()
             ItemManager.add(item)
 
-            findNavController().navigate(R.id.action_addItemFragment_to_allItemsFragment
-                ,bundleOf("item" to item))
+            findNavController().navigate(
+                R.id.action_addItemFragment_to_allItemsFragment
+                , bundleOf("item" to item)
+            )
         }
 
         binding.imageBtn.setOnClickListener {

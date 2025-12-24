@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir
+package com.example.myapplicationsapir.ui.all_characters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplicationsapir.R
+import com.example.myapplicationsapir.data.model.ItemManager
 import com.example.myapplicationsapir.databinding.AllItemsLayoutBinding
+import com.example.myapplicationsapir.ui.all_characters.ItemAdapter
 
 class AllItemsFragment : Fragment() {
 
@@ -37,28 +40,37 @@ class AllItemsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getString("title")?.let {
-            Toast.makeText(requireActivity(),it,Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(),it, Toast.LENGTH_SHORT).show()
         }
 
-        binding.recycler.adapter = ItemAdapter(ItemManager.items, object : ItemAdapter.ItemListener {
-            override fun onItemClicked(index: Int) {
+        binding.recycler.adapter =
+            ItemAdapter(ItemManager.items, object : ItemAdapter.ItemListener {
+                override fun onItemClicked(index: Int) {
 
-                Toast.makeText(requireContext(),
-                    "${ItemManager.items[index]}",Toast.LENGTH_SHORT).show()
-            }
+                    Toast.makeText(
+                        requireContext(),
+                        "${ItemManager.items[index]}", Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-            override fun onItemLongClicked(index: Int) {
-                findNavController().navigate(R.id.action_allItemsFragment_to_detailItemFragment,bundleOf("item" to index))
-            }
-        })
+                override fun onItemLongClicked(index: Int) {
+                    findNavController().navigate(
+                        R.id.action_allItemsFragment_to_detailItemFragment,
+                        bundleOf("item" to index)
+                    )
+                }
+            })
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
-        ItemTouchHelper(object : ItemTouchHelper.Callback(){
+        ItemTouchHelper(object : ItemTouchHelper.Callback() {
 
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
-            ) = makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+            ) = makeFlag(
+                ItemTouchHelper.ACTION_STATE_SWIPE,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            )
 
             override fun onMove(
                 recyclerView: RecyclerView,

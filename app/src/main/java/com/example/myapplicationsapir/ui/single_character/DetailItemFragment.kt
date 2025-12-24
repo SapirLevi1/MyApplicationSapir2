@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir
+package com.example.myapplicationsapir.ui.single_character
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.myapplicationsapir.data.model.ItemManager
 import com.example.myapplicationsapir.databinding.DetailItemLayoutBinding
 
 class DetailItemFragment : Fragment() {

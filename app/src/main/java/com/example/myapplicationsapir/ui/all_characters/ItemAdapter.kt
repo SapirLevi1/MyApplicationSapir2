@@ -1,12 +1,11 @@
-package com.example.myapplicationsapir
+package com.example.myapplicationsapir.ui.all_characters
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplicationsapir.data.model.Item
 import com.example.myapplicationsapir.databinding.ItemLayoutBinding
 
 class ItemAdapter(val items: List<Item>, val callBack: ItemListener)

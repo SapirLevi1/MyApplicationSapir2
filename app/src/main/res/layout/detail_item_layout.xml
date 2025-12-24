@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="30dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".DetailItemFragment"
+    tools:context=".ui.single_character.DetailItemFragment"
     android:background="#aa00">
 
     <androidx.cardview.widget.CardView
