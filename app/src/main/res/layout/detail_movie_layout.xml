@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="30dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.single_character.DetailMovieFragment"
+    android:background="#aa00">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_title"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:text="Movie Title"
+                android:fontFamily="sans-serif-condensed-medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_desc"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="italic"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/detailWatchedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="italic"
+                android:text="Watched: --/--/----" />
+
+            <TextView
+                android:id="@+id/detailScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="italic"
+                android:text="Score: --" />
+
+
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_image"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Back" />
+
+                <Button
+                    android:id="@+id/editBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginStart="16dp"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

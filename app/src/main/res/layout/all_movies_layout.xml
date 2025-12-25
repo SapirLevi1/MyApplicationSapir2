@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.all_characters.AllItemsFragment"
+    tools:context=".ui.all_characters.AllMoviesFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,11 +12,15 @@
         android:id="@+id/recycler"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_add_24"
         android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_add_24"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/fab"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
