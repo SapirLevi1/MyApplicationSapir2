@@ -90,14 +90,15 @@ class AllMoviesFragment : Fragment() {
 
     }
 
+
     private fun showDeleteConfirmationDialog(movie: MovieEntity, position: Int) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Delete movie")
-            .setMessage("Are you sure you want to delete \"${movie.title}\"?")
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle(getString(R.string.dialog_delete_title))
+            .setMessage(getString(R.string.dialog_delete_message, movie.title))
+            .setPositiveButton(getString(R.string.action_delete)) { _, _ ->
                 moviesViewModel.deleteMovie(movie)
             }
-            .setNegativeButton("Cancel") { _, _ ->
+            .setNegativeButton(getString(R.string.action_cancel)) { _, _ ->
                 movieAdapter.notifyItemChanged(position)
             }
             .setOnCancelListener {

@@ -89,7 +89,7 @@ class EditMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (movieId == -1) {
-            Toast.makeText(requireContext(), "Invalid movie id.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.error_invalid_movie_id), Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
             return
         }
@@ -149,7 +149,7 @@ class EditMovieFragment : Fragment() {
         val watchedDate: Long? = selectedWatchedDateMillis
 
         if (title.isBlank()) {
-            binding.movieTitle.error = "Title is required"
+            binding.movieTitle.error = getString(R.string.error_title_required)
             return
         }
 
@@ -166,7 +166,7 @@ class EditMovieFragment : Fragment() {
         moviesViewModel.updateMovieWithValidation(updatedMovie) { result ->
             when (result) {
                 is SaveMovieResult.Success -> {
-                    Toast.makeText(requireContext(), "Movie updated.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.toast_movie_updated), Toast.LENGTH_SHORT).show()
                     findNavController().navigateUp()
                 }
                 is SaveMovieResult.Error -> {

@@ -10,6 +10,8 @@ import com.example.myapplicationsapir.databinding.MovieLayoutBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.example.myapplicationsapir.R
+
 
 class MovieAdapter(
     private val callback: MovieListener
@@ -42,24 +44,29 @@ class MovieAdapter(
             binding.movieTitle.text = movie.title
             binding.movieDescription.text = movie.description
 
-            movie.watchedDate?.let {
-                binding.movieWatchedDate.text = "Watched: ${formatWatchedDate(movie.watchedDate)}"
+            movie.watchedDate?.let { watchedMillis ->
+                val formattedDate = formatWatchedDate(watchedMillis)
+                binding.movieWatchedDate.text =
+                    binding.root.context.getString(R.string.watched_format, formattedDate)
+                binding.movieWatchedDate.visibility = View.VISIBLE
             } ?: run {
                 binding.movieWatchedDate.visibility = View.GONE
             }
 
-            movie.score?.let {
-                binding.movieScore.text = "Score: ${movie.score}/10"
-            } ?:run {
+            movie.score?.let { score ->
+                binding.movieScore.text =
+                    binding.root.context.getString(R.string.score_format, score)
+                binding.movieScore.visibility = View.VISIBLE
+            } ?: run {
                 binding.movieScore.visibility = View.GONE
             }
-
 
             Glide.with(binding.root)
                 .load(movie.imageUri)
                 .circleCrop()
                 .into(binding.movieImage)
         }
+
 
         private fun formatWatchedDate(watchedDateMillis: Long): String {
             return dateFormat.format(Date(watchedDateMillis))

@@ -112,22 +112,21 @@ class AddMovieFragment : Fragment() {
         val watchedMillis = selectedWatchedDateMillis
 
         if (title.isEmpty()) {
-            binding.movieTitle.error = "Title is required"
+            binding.movieTitle.error = getString(R.string.error_title_required)
             return
         }
 
         val now = System.currentTimeMillis()
         if (watchedMillis != null && watchedMillis > now) {
-            binding.datePickerEdittext.error = "Watched date can't be in the future"
-            Toast.makeText(requireContext(),
-                "Watched date can't be in the future",
-                Toast.LENGTH_SHORT).show()
+            val msg = getString(R.string.error_watched_date_future)
+            binding.datePickerEdittext.error = msg
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             return
         }
 
         val score = scoreStr.toIntOrNull()
         if (score != null && score !in 1..10) {
-            binding.scoreInput.error = "Grade must be between 1-10"
+            binding.scoreInput.error = getString(R.string.error_score_range)
             return
         }
 

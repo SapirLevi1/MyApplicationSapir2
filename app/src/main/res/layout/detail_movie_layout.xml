@@ -1,100 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="30dp"
+android:background="@android:color/transparent"
+tools:context=".ui.single_character.DetailMovieFragment">
+
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="30dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.single_character.DetailMovieFragment"
-    android:background="#aa00">
+    app:cardCornerRadius="20dp">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="20dp">
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="@string/placeholder_movie_title"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="Interstellar" />
+
+        <TextView
+            android:id="@+id/movie_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/placeholder_movie_description"
+            android:textSize="25sp"
+            android:textStyle="italic"
+            tools:text="A sci-fi movie description..." />
+
+        <TextView
+            android:id="@+id/detailWatchedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="25sp"
+            android:textStyle="italic"
+            tools:text="Watched: 01/01/2025" />
+
+        <TextView
+            android:id="@+id/detailScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="25sp"
+            android:textStyle="italic"
+            tools:text="Score: 9/10" />
+
+        <ImageView
+            android:id="@+id/movie_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:contentDescription="@string/cd_movie_image" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/movie_title"
-                android:gravity="center"
-                android:textSize="30sp"
-                android:layout_margin="10dp"
-                android:textStyle="bold"
-                android:text="Movie Title"
-                android:fontFamily="sans-serif-condensed-medium"/>
+                android:text="@string/action_back" />
 
-            <TextView
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/editBtn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/movie_desc"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:layout_margin="10dp"
-                android:textStyle="italic"
-                android:text="Description" />
-
-            <TextView
-                android:id="@+id/detailWatchedDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:layout_margin="10dp"
-                android:textStyle="italic"
-                android:text="Watched: --/--/----" />
-
-            <TextView
-                android:id="@+id/detailScore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:layout_margin="10dp"
-                android:textStyle="italic"
-                android:text="Score: --" />
-
-
-            <ImageView
-                android:layout_margin="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/movie_image"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-
-                <Button
-                    android:id="@+id/back_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Back" />
-
-                <Button
-                    android:id="@+id/editBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:layout_gravity="bottom|center"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
-
-
-
+                android:layout_marginStart="16dp"
+                android:text="@string/action_edit" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
