@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Clean modern accent (no gold) -->
+    <color name="app_primary">#4F46E5</color>       <!-- Indigo -->
+    <color name="app_on_primary">#FFFFFF</color>
+
+    <color name="app_secondary">#06B6D4</color>     <!-- Cyan -->
+    <color name="app_on_secondary">#06242B</color>
+
+    <!-- Light surfaces -->
+    <color name="app_background">#F8FAFC</color>    <!-- very light -->
+    <color name="app_surface">#FFFFFF</color>
+    <color name="app_surface_variant">#EEF2F7</color>
+    <color name="app_outline">#D1D5DB</color>
+
+    <!-- Text -->
+    <color name="app_text_primary">#111827</color>
+    <color name="app_text_secondary">#6B7280</color>
+
+    <!-- Rating chip -->
+    <color name="app_rating_bg">#EEF2FF</color>     <!-- indigo-50 -->
+    <color name="app_rating_text">#3730A3</color>   <!-- indigo-800 -->
 </resources>

@@ -1,9 +1,20 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyApplicationSapir" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MyApplicationSapir" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-    <style name="Theme.MyApplicationSapir" parent="Base.Theme.MyApplicationSapir" />
+        <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorPrimaryVariant">@color/app_primary</item>
+        <item name="colorOnPrimary">@color/app_on_primary</item>
+
+        <item name="colorSecondary">@color/app_secondary</item>
+        <item name="colorOnSecondary">@color/app_on_secondary</item>
+
+        <item name="android:windowBackground">@color/app_background</item>
+
+        <!-- Light status bar icons in light mode -->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Default component styles -->
+        <item name="materialButtonStyle">@style/AppButton</item>
+    </style>
 </resources>

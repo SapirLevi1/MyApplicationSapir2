@@ -1,7 +1,19 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MyApplicationSapir" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MyApplicationSapir" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorPrimaryVariant">@color/app_primary</item>
+        <item name="colorOnPrimary">@color/app_on_primary</item>
+
+        <item name="colorSecondary">@color/app_secondary</item>
+        <item name="colorOnSecondary">@color/app_on_secondary</item>
+
+        <item name="android:windowBackground">@color/app_background</item>
+
+        <!-- Dark mode: status bar icons should be light -->
+        <item name="android:windowLightStatusBar">false</item>
+
+        <item name="materialButtonStyle">@style/AppButton</item>
     </style>
 </resources>

@@ -46,38 +46,45 @@ class DetailMovieFragment : Fragment() {
 
         val movieId = arguments?.getInt("movieId") ?: return
 
+
+        binding.editBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_detailMovieFragment_to_editMovieFragment,
+                bundleOf("movieId" to movieId)
+            )
+        }
+
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         moviesViewModel.getMovieById(movieId).observe(viewLifecycleOwner) { movie ->
             binding.movieTitle.text = movie.title
             binding.movieDesc.text = movie.description
 
-            movie.watchedDate?.let {
+
+            movie.watchedDate?.let { watchedMillis ->
+                val formattedDate = dateFormat.format(Date(watchedMillis))
                 binding.detailWatchedDate.text =
-                    "Watched: ${dateFormat.format(Date(movie.watchedDate))}"
-            } ?: run{
+                    getString(R.string.watched_format, formattedDate)
+                binding.detailWatchedDate.visibility = View.VISIBLE
+            } ?: run {
                 binding.detailWatchedDate.visibility = View.GONE
             }
 
-            movie.score?.let {
-                binding.detailScore.text = "Score: ${movie.score}/10"
+
+            movie.score?.let { score ->
+                binding.detailScore.text =
+                    getString(R.string.score_format, score)
+                binding.detailScore.visibility = View.VISIBLE
             } ?: run {
                 binding.detailScore.visibility = View.GONE
             }
 
             Glide.with(binding.root)
                 .load(movie.imageUri)
-                .circleCrop()
+                .centerCrop()
                 .into(binding.movieImage)
-
-            binding.editBtn.setOnClickListener {
-                findNavController().navigate(
-                    R.id.action_detailMovieFragment_to_editMovieFragment,
-                    bundleOf("movieId" to movieId)
-                )
-            }
-
-            binding.backBtn.setOnClickListener {
-                findNavController().navigateUp()
-            }
         }
     }
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Primary button -->
+    <style name="AppButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:minHeight">@dimen/btn_height</item>
+        <item name="cornerRadius">@dimen/radius_m</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingLeft">@dimen/space_l</item>
+        <item name="android:paddingRight">@dimen/space_l</item>
+    </style>
+
+    <!-- Secondary/outlined button -->
+    <style name="AppButton.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:minHeight">@dimen/btn_height</item>
+        <item name="cornerRadius">@dimen/radius_m</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingLeft">@dimen/space_l</item>
+        <item name="android:paddingRight">@dimen/space_l</item>
+    </style>
+
+    <!-- Text input -->
+    <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/app_outline</item>
+        <item name="hintTextColor">@color/app_text_secondary</item>
+
+        <item name="boxCornerRadiusTopStart">@dimen/radius_m</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_m</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_m</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_m</item>
+    </style>
+
+    <!-- Card -->
+    <style name="AppCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/radius_l</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardBackgroundColor">@color/app_surface</item>
+    </style>
+
+    <!-- Rating chip -->
+    <style name="AppRatingChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/app_rating_bg</item>
+        <item name="android:textColor">@color/app_rating_text</item>
+        <item name="chipCornerRadius">@dimen/radius_s</item>
+        <item name="chipStrokeColor">@color/app_outline</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+</resources>

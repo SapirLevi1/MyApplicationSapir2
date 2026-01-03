@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplicationsapir.R
 import com.example.myapplicationsapir.data.model.MovieEntity
 import com.example.myapplicationsapir.databinding.MovieLayoutBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import com.example.myapplicationsapir.R
-
 
 class MovieAdapter(
     private val callback: MovieListener
@@ -41,21 +40,21 @@ class MovieAdapter(
         }
 
         fun bind(movie: MovieEntity) {
+            val ctx = binding.root.context
+
             binding.movieTitle.text = movie.title
             binding.movieDescription.text = movie.description
 
             movie.watchedDate?.let { watchedMillis ->
-                val formattedDate = formatWatchedDate(watchedMillis)
-                binding.movieWatchedDate.text =
-                    binding.root.context.getString(R.string.watched_format, formattedDate)
+                val formatted = dateFormat.format(Date(watchedMillis))
+                binding.movieWatchedDate.text = ctx.getString(R.string.watched_format, formatted)
                 binding.movieWatchedDate.visibility = View.VISIBLE
             } ?: run {
                 binding.movieWatchedDate.visibility = View.GONE
             }
 
             movie.score?.let { score ->
-                binding.movieScore.text =
-                    binding.root.context.getString(R.string.score_format, score)
+                binding.movieScore.text = ctx.getString(R.string.score_format, score)
                 binding.movieScore.visibility = View.VISIBLE
             } ?: run {
                 binding.movieScore.visibility = View.GONE
@@ -65,11 +64,6 @@ class MovieAdapter(
                 .load(movie.imageUri)
                 .circleCrop()
                 .into(binding.movieImage)
-        }
-
-
-        private fun formatWatchedDate(watchedDateMillis: Long): String {
-            return dateFormat.format(Date(watchedDateMillis))
         }
     }
 

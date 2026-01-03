@@ -1,103 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="30dp"
-android:background="@android:color/transparent"
-tools:context=".ui.single_character.DetailMovieFragment">
-
-<androidx.cardview.widget.CardView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardCornerRadius="20dp">
+    android:background="@color/app_background"
+    android:fillViewport="true"
+    tools:context=".ui.single_character.DetailMovieFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_m">
 
-        <TextView
-            android:id="@+id/movie_title"
+        <com.google.android.material.card.MaterialCardView
+            style="@style/AppCard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:gravity="center"
-            android:text="@string/placeholder_movie_title"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            tools:text="Interstellar" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/movie_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="@string/placeholder_movie_description"
-            android:textSize="25sp"
-            android:textStyle="italic"
-            tools:text="A sci-fi movie description..." />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
 
-        <TextView
-            android:id="@+id/detailWatchedDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text=""
-            android:textSize="25sp"
-            android:textStyle="italic"
-            tools:text="Watched: 01/01/2025" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/movie_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/cd_movie_image"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.MediumComponent"
+                    tools:src="@mipmap/ic_launcher"/>
 
-        <TextView
-            android:id="@+id/detailScore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text=""
-            android:textSize="25sp"
-            android:textStyle="italic"
-            tools:text="Score: 9/10" />
+                <TextView
+                    android:id="@+id/movie_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:textColor="@color/app_text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    tools:text="Interstellar" />
 
-        <ImageView
-            android:id="@+id/movie_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:contentDescription="@string/cd_movie_image" />
+                <TextView
+                    android:id="@+id/movie_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="15sp"
+                    tools:text="A sci-fi movie description..." />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:layoutDirection="locale"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/detailWatchedDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/app_text_secondary"
+                        android:textSize="14sp"
+                        android:textDirection="locale"
+                        tools:text="Watched: 01/01/2025" />
+
+                    <TextView
+                        android:id="@+id/detailScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_s"
+                        android:textColor="@color/app_primary"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textDirection="locale"
+                        tools:text="Score: 8/10" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
+            android:layout_marginTop="@dimen/space_m"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/back_btn"
-                android:layout_width="wrap_content"
+                style="@style/AppButton.Outlined"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/action_back" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/editBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/space_s"
+                android:layout_weight="1"
                 android:text="@string/action_edit" />
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+</ScrollView>
