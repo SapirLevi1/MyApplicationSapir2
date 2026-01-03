@@ -4,10 +4,8 @@
     <dimen name="space_s">10dp</dimen>
     <dimen name="space_m">16dp</dimen>
     <dimen name="space_l">24dp</dimen>
-
     <dimen name="radius_s">12dp</dimen>
     <dimen name="radius_m">16dp</dimen>
     <dimen name="radius_l">20dp</dimen>
-
     <dimen name="btn_height">48dp</dimen>
 </resources>

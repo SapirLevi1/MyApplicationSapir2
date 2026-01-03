@@ -9,7 +9,6 @@
     <string name="placeholder_movie_title">Movie title</string>
     <string name="placeholder_movie_description">Movie description</string>
 
-
     <!-- Actions / buttons -->
     <string name="action_pick_image">Pick Image</string>
     <string name="action_cancel">Cancel</string>
