@@ -32,15 +32,33 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/movie_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Interstellar" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/movie_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Interstellar" />
+
+                <ImageView
+                    android:id="@+id/heart_indicator"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="@string/cd_favorite_indicator"
+                    android:src="@drawable/ic_heart_outline"
+                    tools:tint="@android:color/holo_red_light" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/movie_description"

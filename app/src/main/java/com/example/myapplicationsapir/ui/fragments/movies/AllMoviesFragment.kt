@@ -1,11 +1,10 @@
-package com.example.myapplicationsapir.ui.all_characters
+package com.example.myapplicationsapir.ui.fragments.movies
 
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,22 +13,19 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplicationsapir.R
-import com.example.myapplicationsapir.data.local_db.MovieDatabase
-import com.example.myapplicationsapir.data.model.MovieEntity
-import com.example.myapplicationsapir.data.repository.MovieRepository
-import com.example.myapplicationsapir.databinding.AllMoviesLayoutBinding
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModel
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModelFactory
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
+import com.example.myapplicationsapir.databinding.FragmentAllMoviesBinding
+import com.example.myapplicationsapir.ui.fragments.movies.adapter.MovieAdapter
+import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
+import com.example.myapplicationsapir.viewmodel.factory.MovieViewModelFactoryProvider
 
 class AllMoviesFragment : Fragment() {
 
-    private var _binding: AllMoviesLayoutBinding? = null
+    private var _binding: FragmentAllMoviesBinding? = null
     private val binding get() = _binding!!
 
     private val moviesViewModel: MoviesViewModel by viewModels {
-        val dao = MovieDatabase.getDatabase(requireContext().applicationContext).movieDao()
-        val repo = MovieRepository(dao)
-        MoviesViewModelFactory(repo)
+        MovieViewModelFactoryProvider.getFactory(requireContext())
     }
 
     private lateinit var movieAdapter: MovieAdapter
@@ -39,10 +35,14 @@ class AllMoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AllMoviesLayoutBinding.inflate(inflater, container, false)
+        _binding = FragmentAllMoviesBinding.inflate(inflater, container, false)
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_allMoviesFragment_to_addMoviesFragment)
+        }
+
+        binding.favoritesBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_allMoviesFragment_to_favoriteMoviesFragment)
         }
 
         return binding.root
@@ -65,6 +65,13 @@ class AllMoviesFragment : Fragment() {
         binding.recycler.adapter = movieAdapter
 
         moviesViewModel.movies.observe(viewLifecycleOwner) { movies ->
+            if (movies.isEmpty()) {
+                binding.emptyStateText.visibility = View.VISIBLE
+                binding.recycler.visibility = View.GONE
+            } else {
+                binding.emptyStateText.visibility = View.GONE
+                binding.recycler.visibility = View.VISIBLE
+            }
             movieAdapter.submitList(movies)
         }
 

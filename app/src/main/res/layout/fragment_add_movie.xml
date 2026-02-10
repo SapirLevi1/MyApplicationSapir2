@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background"
     android:padding="16dp"
-    tools:context=".ui.add_character.AddMovieFragment">
+    tools:context=".ui.fragments.movies.AddMovieFragment">
 
     <TextView
         android:id="@+id/titleAddMovie"

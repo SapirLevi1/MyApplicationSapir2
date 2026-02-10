@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir.ui.edit_movie
+package com.example.myapplicationsapir.ui.fragments.movies
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -15,24 +15,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplicationsapir.R
-import com.example.myapplicationsapir.data.local_db.MovieDatabase
-import com.example.myapplicationsapir.data.model.MovieEntity
-import com.example.myapplicationsapir.data.repository.MovieRepository
-import com.example.myapplicationsapir.databinding.EditMovieLayoutBinding
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModel
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModelFactory
-import com.example.myapplicationsapir.ui.view_models.SaveMovieResult
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
+import com.example.myapplicationsapir.databinding.FragmentEditMovieBinding
+import com.example.myapplicationsapir.viewmodel.factory.MovieViewModelFactoryProvider
+import com.example.myapplicationsapir.viewmodel.model.SaveMovieResult
+import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
 import java.util.Calendar
 
 class EditMovieFragment : Fragment() {
 
-    private var _binding: EditMovieLayoutBinding? = null
+    private var _binding: FragmentEditMovieBinding? = null
     private val binding get() = _binding!!
 
     private val moviesViewModel: MoviesViewModel by viewModels {
-        val dao = MovieDatabase.getDatabase(requireContext().applicationContext).movieDao()
-        val repo = MovieRepository(dao)
-        MoviesViewModelFactory(repo)
+        MovieViewModelFactoryProvider.getFactory(requireContext())
     }
 
     private var movieId: Int = -1
@@ -61,23 +57,19 @@ class EditMovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = EditMovieLayoutBinding.inflate(inflater, container, false)
+        _binding = FragmentEditMovieBinding.inflate(inflater, container, false)
 
-        // Cancel = cancel entire edit
         binding.cancelBtn.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        // Date picker open on click (edit text or icon)
         binding.datePickerEdittext.setOnClickListener { showWatchedDatePicker() }
         binding.datePickerLayout.setEndIconOnClickListener { showWatchedDatePicker() }
 
-        // Pick image
         binding.imageBtn.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
-        // Save
         binding.saveBtn.setOnClickListener {
             onSaveClicked()
         }
@@ -89,7 +81,11 @@ class EditMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (movieId == -1) {
-            Toast.makeText(requireContext(), getString(R.string.error_invalid_movie_id), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.error_invalid_movie_id),
+                Toast.LENGTH_SHORT
+            ).show()
             findNavController().navigateUp()
             return
         }
@@ -166,9 +162,14 @@ class EditMovieFragment : Fragment() {
         moviesViewModel.updateMovieWithValidation(updatedMovie) { result ->
             when (result) {
                 is SaveMovieResult.Success -> {
-                    Toast.makeText(requireContext(), getString(R.string.toast_movie_updated), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.toast_movie_updated),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     findNavController().navigateUp()
                 }
+
                 is SaveMovieResult.Error -> {
                     Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
                 }

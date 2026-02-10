@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir.ui.add_character
+package com.example.myapplicationsapir.ui.fragments.movies
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -14,29 +14,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplicationsapir.R
-import com.example.myapplicationsapir.data.local_db.MovieDatabase
-import com.example.myapplicationsapir.data.model.MovieEntity
-import com.example.myapplicationsapir.data.repository.MovieRepository
-import com.example.myapplicationsapir.databinding.AddMovieLayoutBinding
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModel
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModelFactory
-import com.example.myapplicationsapir.ui.view_models.SaveMovieResult
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
+import com.example.myapplicationsapir.databinding.FragmentAddMovieBinding
+import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
+import com.example.myapplicationsapir.viewmodel.factory.MovieViewModelFactoryProvider
+import com.example.myapplicationsapir.viewmodel.model.SaveMovieResult
+
 import java.util.Calendar
 
 class AddMovieFragment : Fragment() {
 
-    private var _binding: AddMovieLayoutBinding? = null
+    private var _binding: FragmentAddMovieBinding? = null
     private val binding get() = _binding!!
 
     private var imageUri: Uri? = null
     private var selectedWatchedDateMillis: Long? = null
 
     private val moviesViewModel: MoviesViewModel by viewModels {
-        val dao = MovieDatabase.getDatabase(requireContext().applicationContext).movieDao()
-        val repo = MovieRepository(dao)
-        MoviesViewModelFactory(repo)
+        MovieViewModelFactoryProvider.getFactory(requireContext())
     }
-
     private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             if (uri != null) {
@@ -54,7 +50,7 @@ class AddMovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AddMovieLayoutBinding.inflate(inflater, container, false)
+        _binding = FragmentAddMovieBinding.inflate(inflater, container, false)
 
         binding.datePickerEdittext.setOnClickListener {
             showWatchedDatePicker()
@@ -143,6 +139,7 @@ class AddMovieFragment : Fragment() {
                 is SaveMovieResult.Success -> {
                     findNavController().navigate(R.id.action_addMovieFragment_to_allMoviesFragment)
                 }
+
                 is SaveMovieResult.Error -> {
                     Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
                 }

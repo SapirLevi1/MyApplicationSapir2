@@ -1,20 +1,18 @@
-package com.example.myapplicationsapir.ui.view_models
+package com.example.myapplicationsapir.viewmodel.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplicationsapir.data.model.MovieEntity
-import com.example.myapplicationsapir.data.repository.MovieRepository
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
+import com.example.myapplicationsapir.repository.MovieRepository
+import com.example.myapplicationsapir.viewmodel.model.SaveMovieResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-sealed class SaveMovieResult {
-    object Success : SaveMovieResult()
-    data class Error(val message: String) : SaveMovieResult()
-}
 
 class MoviesViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
     val movies: LiveData<List<MovieEntity>> = movieRepository.getAllMovies()
+    val favoriteMovies: LiveData<List<MovieEntity>> = movieRepository.getFavoriteMovies()
 
     fun getMovieById(id: Int): LiveData<MovieEntity> =
         movieRepository.getMovieById(id)
@@ -22,6 +20,12 @@ class MoviesViewModel(private val movieRepository: MovieRepository) : ViewModel(
     fun deleteMovie(movie: MovieEntity) {
         viewModelScope.launch {
             movieRepository.deleteMovie(movie)
+        }
+    }
+
+    fun toggleMovieLike(movieId: Int, isLiked: Boolean) {
+        viewModelScope.launch {
+            movieRepository.updateMovieLikeStatus(movieId, isLiked)
         }
     }
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/app_background"
     android:fillViewport="true"
-    tools:context=".ui.single_character.DetailMovieFragment">
+    tools:context=".ui.fragments.movies.DetailsMovieFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,6 +43,17 @@
                     android:textSize="22sp"
                     android:textStyle="bold"
                     tools:text="Interstellar" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/favorite_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/action_add_to_favorites"
+                    app:icon="@drawable/ic_heart_outline"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp" />
 
                 <TextView
                     android:id="@+id/movie_desc"

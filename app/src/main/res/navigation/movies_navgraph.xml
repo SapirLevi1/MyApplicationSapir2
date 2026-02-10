@@ -7,21 +7,24 @@
 
     <fragment
         android:id="@+id/allMoviesFragment"
-        android:name="com.example.myapplicationsapir.ui.all_characters.AllMoviesFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.AllMoviesFragment"
         android:label="all_movies_layout"
-        tools:layout="@layout/all_movies_layout" >
+        tools:layout="@layout/fragment_all_movies" >
         <action
             android:id="@+id/action_allMoviesFragment_to_addMoviesFragment"
             app:destination="@id/addMovieFragment" />
         <action
             android:id="@+id/action_allMoviesFragment_to_detailMovieFragment"
             app:destination="@id/detailMovieFragment" />
+        <action
+            android:id="@+id/action_allMoviesFragment_to_favoriteMoviesFragment"
+            app:destination="@id/favoriteMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/addMovieFragment"
-        android:name="com.example.myapplicationsapir.ui.add_character.AddMovieFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.AddMovieFragment"
         android:label="add_movie_layout"
-        tools:layout="@layout/add_movie_layout" >
+        tools:layout="@layout/fragment_add_movie" >
         <action
             android:id="@+id/action_addMovieFragment_to_allMoviesFragment"
             app:destination="@id/allMoviesFragment"
@@ -30,9 +33,9 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
-        android:name="com.example.myapplicationsapir.ui.single_character.DetailMovieFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.DetailsMovieFragment"
         android:label="detail_movie_layout"
-        tools:layout="@layout/detail_movie_layout">
+        tools:layout="@layout/fragment_details_movie">
         <action
             android:id="@+id/action_detailMovieFragment_to_editMovieFragment"
             app:destination="@id/editMovieFragment" />
@@ -40,11 +43,20 @@
     </fragment>
     <fragment
         android:id="@+id/editMovieFragment"
-        android:name="com.example.myapplicationsapir.ui.edit_movie.EditMovieFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.EditMovieFragment"
         android:label="Edit Movie">
         <argument
             android:name="movieId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteMoviesFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.FavoriteMoviesFragment"
+        android:label="@string/title_favorite_movies"
+        tools:layout="@layout/fragment_favorite_movies">
+        <action
+            android:id="@+id/action_favoriteMoviesFragment_to_detailMovieFragment"
+            app:destination="@id/detailMovieFragment" />
     </fragment>
 
 </navigation>

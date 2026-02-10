@@ -1,8 +1,9 @@
-package com.example.myapplicationsapir.ui.view_models
+package com.example.myapplicationsapir.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplicationsapir.data.repository.MovieRepository
+import com.example.myapplicationsapir.repository.MovieRepository
+import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
 
 class MoviesViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

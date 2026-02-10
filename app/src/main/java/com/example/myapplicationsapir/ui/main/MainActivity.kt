@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir.ui
+package com.example.myapplicationsapir.ui.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

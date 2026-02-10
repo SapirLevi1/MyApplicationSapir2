@@ -1,10 +1,12 @@
-package com.example.myapplicationsapir.data.repository
+package com.example.myapplicationsapir.repository
 
 import androidx.lifecycle.LiveData
-import com.example.myapplicationsapir.data.local_db.MovieDao
-import com.example.myapplicationsapir.data.model.MovieEntity
+import com.example.myapplicationsapir.data.local.dao.MovieDao
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
 
-class MovieRepository(private val movieDao: MovieDao) {
+class MovieRepository(
+    private val movieDao: MovieDao,
+) {
 
     suspend fun addMovie(movie: MovieEntity) = movieDao.addMovie(movie)
     suspend fun updateMovie(movie: MovieEntity) = movieDao.updateMovie(movie)
@@ -18,4 +20,9 @@ class MovieRepository(private val movieDao: MovieDao) {
 
     suspend fun movieWithTitleExistsExcludingId(title: String, movieId: Int): Boolean =
         movieDao.countMoviesWithTitleExcludingId(title, movieId) > 0
+
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>> = movieDao.getFavoriteMovies()
+
+    suspend fun updateMovieLikeStatus(movieId: Int, isLiked: Boolean) =
+        movieDao.updateMovieLikeStatus(movieId, isLiked)
 }

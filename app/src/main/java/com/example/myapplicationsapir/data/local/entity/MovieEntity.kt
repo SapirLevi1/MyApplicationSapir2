@@ -1,4 +1,5 @@
-package com.example.myapplicationsapir.data.model
+package com.example.myapplicationsapir.data.local.entity
+
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -13,16 +14,18 @@ import kotlinx.parcelize.Parcelize
 )
 data class MovieEntity(
     @ColumnInfo(name = "title") //title
-    val title:String,
+    val title: String,
     @ColumnInfo(name = "movie_desc") //description
-    val description:String,
+    val description: String,
     @ColumnInfo(name = "watched_date")
     val watchedDate: Long?, // timestamp
     @ColumnInfo(name = "score")
     val score: Int?,
     @ColumnInfo(name = "image") //imageUri
-    val imageUri: String?) : Parcelable {
-
+    val imageUri: String?,
+    @ColumnInfo(name = "is_liked")
+    val isLiked: Boolean = false
+) : Parcelable {
     @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
+    var id: Int = 0
 }

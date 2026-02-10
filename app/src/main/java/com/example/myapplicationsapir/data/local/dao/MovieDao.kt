@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir.data.local_db
+package com.example.myapplicationsapir.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,12 +7,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.myapplicationsapir.data.model.MovieEntity
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
 
 @Dao
 interface MovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun addMovie(movieEntity: MovieEntity)
 
     @Delete
@@ -32,4 +32,10 @@ interface MovieDao {
 
     @Query("SELECT COUNT(*) FROM movies WHERE title = :title AND id != :movieId")
     suspend fun countMoviesWithTitleExcludingId(title: String, movieId: Int): Int
+
+    @Query("SELECT * FROM movies WHERE is_liked = 1 ORDER BY title ASC")
+    fun getFavoriteMovies(): LiveData<List<MovieEntity>>
+
+    @Query("UPDATE movies SET is_liked = :isLiked WHERE id = :movieId")
+    suspend fun updateMovieLikeStatus(movieId: Int, isLiked: Boolean)
 }

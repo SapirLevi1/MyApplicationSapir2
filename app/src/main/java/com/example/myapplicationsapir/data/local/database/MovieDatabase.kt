@@ -1,14 +1,15 @@
-package com.example.myapplicationsapir.data.local_db
+package com.example.myapplicationsapir.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myapplicationsapir.data.model.MovieEntity
+import com.example.myapplicationsapir.data.local.dao.MovieDao
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
 
 @Database(
     entities = [MovieEntity::class],
-    version = 3,
+    version = 1,
     exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
 

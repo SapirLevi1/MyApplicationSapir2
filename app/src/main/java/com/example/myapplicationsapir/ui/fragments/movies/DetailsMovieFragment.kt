@@ -1,4 +1,4 @@
-package com.example.myapplicationsapir.ui.single_character
+package com.example.myapplicationsapir.ui.fragments.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,24 +10,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplicationsapir.R
-import com.example.myapplicationsapir.data.local_db.MovieDatabase
-import com.example.myapplicationsapir.data.repository.MovieRepository
-import com.example.myapplicationsapir.databinding.DetailMovieLayoutBinding
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModel
-import com.example.myapplicationsapir.ui.view_models.MoviesViewModelFactory
+import com.example.myapplicationsapir.databinding.FragmentDetailsMovieBinding
+import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
+import com.example.myapplicationsapir.viewmodel.factory.MovieViewModelFactoryProvider
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class DetailMovieFragment : Fragment() {
+class DetailsMovieFragment : Fragment() {
 
-    private var _binding: DetailMovieLayoutBinding? = null
+    private var _binding: FragmentDetailsMovieBinding? = null
     private val binding get() = _binding!!
 
     private val moviesViewModel: MoviesViewModel by viewModels {
-        val dao = MovieDatabase.getDatabase(requireContext().applicationContext).movieDao()
-        val repo = MovieRepository(dao)
-        MoviesViewModelFactory(repo)
+        MovieViewModelFactoryProvider.getFactory(requireContext())
     }
 
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -37,7 +33,7 @@ class DetailMovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DetailMovieLayoutBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailsMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -62,6 +58,13 @@ class DetailMovieFragment : Fragment() {
             binding.movieTitle.text = movie.title
             binding.movieDesc.text = movie.description
 
+            // Update favorite button
+            updateFavoriteButton(movie.isLiked)
+
+            // Set click listener for favorite button
+            binding.favoriteBtn.setOnClickListener {
+                moviesViewModel.toggleMovieLike(movieId, !movie.isLiked)
+            }
 
             movie.watchedDate?.let { watchedMillis ->
                 val formattedDate = dateFormat.format(Date(watchedMillis))
@@ -85,6 +88,18 @@ class DetailMovieFragment : Fragment() {
                 .load(movie.imageUri)
                 .centerCrop()
                 .into(binding.movieImage)
+        }
+    }
+
+    private fun updateFavoriteButton(isLiked: Boolean) {
+        if (isLiked) {
+            binding.favoriteBtn.text = getString(R.string.action_remove_from_favorites)
+            binding.favoriteBtn.setIconResource(R.drawable.ic_heart_filled)
+            binding.favoriteBtn.setIconTintResource(android.R.color.holo_red_light)
+        } else {
+            binding.favoriteBtn.text = getString(R.string.action_add_to_favorites)
+            binding.favoriteBtn.setIconResource(R.drawable.ic_heart_outline)
+            binding.favoriteBtn.setIconTintResource(R.color.app_text_secondary)
         }
     }
 
