@@ -33,6 +33,13 @@
             android:gravity="start" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/omdb_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_omdb"/>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/favorites_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"

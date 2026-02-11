@@ -41,6 +41,10 @@ class AllMoviesFragment : Fragment() {
             findNavController().navigate(R.id.action_allMoviesFragment_to_addMoviesFragment)
         }
 
+        binding.omdbBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_allMoviesFragment_to_omdbFragment)
+        }
+
         binding.favoritesBtn.setOnClickListener {
             findNavController().navigate(R.id.action_allMoviesFragment_to_favoriteMoviesFragment)
         }

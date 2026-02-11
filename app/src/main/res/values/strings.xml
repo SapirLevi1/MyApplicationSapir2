@@ -9,6 +9,7 @@
     <string name="title_favorite_movies">Favorite Movies</string>
     <string name="placeholder_movie_title">Movie title</string>
     <string name="placeholder_movie_description">Movie description</string>
+    <string name="title_omdb">Open Movie Database</string>
 
     <!-- Actions / buttons -->
     <string name="action_pick_image">Pick Image</string>
@@ -21,12 +22,16 @@
     <string name="action_favorites">Favorites</string>
     <string name="action_add_to_favorites">Add to Favorites</string>
     <string name="action_remove_from_favorites">Remove from Favorites</string>
+    <string name="action_omdb">OMDB</string>
+    <string name="search_button">Search</string>
+    <string name="action_add_to_my_list">Add to My List</string>
 
     <!-- Hints -->
     <string name="hint_movie_title">Enter movie title</string>
     <string name="hint_movie_description">Enter movie description</string>
     <string name="hint_pick_date">Pick date</string>
     <string name="hint_score">Score (1–10)</string>
+    <string name="hint_year">Year</string>
 
     <!-- Formats -->
     <string name="watched_format">Watched: %1$s</string>
@@ -45,6 +50,10 @@
     <string name="toast_movie_updated">Movie updated.</string>
     <string name="empty_favorites_message">No favorite movies yet. Mark movies as favorites by clicking the heart icon!</string>
     <string name="empty_movies_message">No movies added yet.\nTap the + button to add your first movie!</string>
+    <string name="loading_omdb_message">Waiting for OMDB response...</string>
+    <string name="empty_omdb_message">Search for a movie title</string>
+    <string name="omdb_movie_details_not_loaded">Movie details not loaded yet</string>
+    <string name="omdb_movie_added">The movie was added to your list</string>
 
     <!-- Accessibility -->
     <string name="cd_add_movie">Add movie</string>
