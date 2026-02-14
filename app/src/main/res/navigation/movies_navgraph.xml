@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_allMoviesFragment_to_favoriteMoviesFragment"
             app:destination="@id/favoriteMoviesFragment" />
+        <action
+            android:id="@+id/action_allMoviesFragment_to_omdbFragment"
+            app:destination="@+id/OMDBFragment"/>
     </fragment>
     <fragment
         android:id="@+id/addMovieFragment"
@@ -58,5 +61,23 @@
             android:id="@+id/action_favoriteMoviesFragment_to_detailMovieFragment"
             app:destination="@id/detailMovieFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/OMDBFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.OMDBFragment"
+        android:label="@string/title_omdb"
+        tools:layout="@layout/fragment_omdb">
+
+        <action
+            android:id="@+id/action_OMDBFragment_to_detailsMovieAPIFragment"
+            app:destination="@id/detailsMovieAPIFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailsMovieAPIFragment"
+        android:name="com.example.myapplicationsapir.ui.fragments.movies.DetailsMovieAPIFragment"
+        android:label="title_movie_details"
+        tools:layout="@layout/fragment_details_movie_api">
+    </fragment>
+
 
 </navigation>
