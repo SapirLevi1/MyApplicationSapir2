@@ -7,6 +7,7 @@
     <string name="title_add_movie">הוסף סרט</string>
     <string name="title_edit_movie">ערוך סרט</string>
     <string name="title_movie_details">פרטי סרט</string>
+    <string name="title_favorite_movies">סרטים מועדפים</string>
     <string name="placeholder_movie_title">כותרת הסרט</string>
     <string name="placeholder_movie_description">תיאור הסרט</string>
     <string name="title_omdb">מסד נתוני סרטים פתוח</string>
@@ -20,6 +21,9 @@
     <string name="action_back">חזרה</string>
     <string name="action_edit">ערוך</string>
     <string name="action_delete">מחק</string>
+    <string name="action_favorites">מועדפים</string>
+    <string name="action_add_to_favorites">הוסף למועדפים</string>
+    <string name="action_remove_from_favorites">הסר ממועדפים</string>
     <string name="action_omdb">OMDB</string>
     <string name="search_button">חפש</string>
     <string name="action_add_to_my_list">הוסף לרשימה שלי</string>
@@ -46,6 +50,8 @@
     <string name="error_duplicate_title">קיים כבר סרט עם כותרת זו</string>
     <string name="error_invalid_movie_id">מזהה סרט לא תקין</string>
     <string name="toast_movie_updated">הסרט עודכן</string>
+    <string name="empty_favorites_message">עדיין אין סרטים מועדפים. סמן סרטים כמועדפים על ידי לחיצה על אייקון הלב!</string>
+    <string name="empty_movies_message">עדיין לא נוספו סרטים\n לחץ על כפתור + כדי להוסיך את הסרט הראשון שלך!</string>
     <string name="loading_omdb_message">מחכה לתשובה מ-OMDB...</string>
     <string name="empty_omdb_message">הכנס שם של סרט</string>
     <string name="omdb_movie_details_not_loaded">פרטי הסרט עדיין לא נטענו</string>
@@ -54,4 +60,5 @@
     <!-- Accessibility -->
     <string name="cd_add_movie">הוסף סרט</string>
     <string name="cd_movie_image">תמונת סרט</string>
+    <string name="cd_favorite_indicator">סממן מועדפים</string>
 </resources>

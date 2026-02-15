@@ -74,6 +74,16 @@ class EditMovieFragment : Fragment() {
             onSaveClicked()
         }
 
+        binding.scoreInput.filters = arrayOf(android.text.InputFilter { source, start, end, dest, dstart, dend ->
+            val newText = dest.toString()
+                .substring(0, dstart) + source.subSequence(start, end) + dest.toString().substring(dend)
+
+            if (newText.isBlank()) return@InputFilter null
+
+            val value = newText.toIntOrNull() ?: return@InputFilter ""
+            if (value in 1..10) null else ""
+        })
+
         return binding.root
     }
 
@@ -112,10 +122,11 @@ class EditMovieFragment : Fragment() {
     private fun showWatchedDatePicker() {
         val cal = Calendar.getInstance()
 
-        // If already selected, open picker on that date
         selectedWatchedDateMillis?.let { cal.timeInMillis = it }
 
-        DatePickerDialog(
+        val now = Calendar.getInstance()
+
+        val picker = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
                 val chosen = Calendar.getInstance().apply {
@@ -127,13 +138,18 @@ class EditMovieFragment : Fragment() {
                     set(Calendar.SECOND, 0)
                     set(Calendar.MILLISECOND, 0)
                 }
+
                 selectedWatchedDateMillis = chosen.timeInMillis
                 binding.datePickerEdittext.setText("${dayOfMonth}/${month + 1}/$year")
             },
-            cal.get(Calendar.YEAR),
-            cal.get(Calendar.MONTH),
-            cal.get(Calendar.DAY_OF_MONTH)
-        ).show()
+            now.get(Calendar.YEAR),
+            now.get(Calendar.MONTH),
+            now.get(Calendar.DAY_OF_MONTH)
+        )
+
+        picker.datePicker.maxDate = System.currentTimeMillis()
+
+        picker.show()
     }
 
     private fun onSaveClicked() {
