@@ -38,4 +38,8 @@ interface MovieDao {
 
     @Query("UPDATE movies SET is_liked = :isLiked WHERE id = :movieId")
     suspend fun updateMovieLikeStatus(movieId: Int, isLiked: Boolean)
+
+    @Query("SELECT COUNT(*) FROM movies WHERE score IS NULL")
+    suspend fun countUnratedMovies(): Int
+
 }
