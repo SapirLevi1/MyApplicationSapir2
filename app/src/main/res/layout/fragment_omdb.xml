@@ -29,7 +29,7 @@
             android:text="@string/title_omdb"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/app_text_primary"
+            android:textColor="@color/app_main_title"
             android:gravity="start" />
 
     </LinearLayout>
