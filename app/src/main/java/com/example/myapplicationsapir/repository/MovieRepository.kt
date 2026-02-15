@@ -5,7 +5,7 @@ import com.example.myapplicationsapir.data.local.dao.MovieDao
 import com.example.myapplicationsapir.data.local.entity.MovieEntity
 
 class MovieRepository(
-    private val movieDao: MovieDao,
+    private val movieDao: MovieDao
 ) {
 
     suspend fun addMovie(movie: MovieEntity) = movieDao.addMovie(movie)

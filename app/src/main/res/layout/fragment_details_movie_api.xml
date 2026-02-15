@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:fillViewport="true"
+    tools:context=".ui.fragments.movies.DetailsMovieAPIFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_m">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/space_m">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/movie_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:contentDescription="@string/cd_movie_image"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.MediumComponent"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/movie_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:textColor="@color/app_text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    tools:text="Interstellar" />
+
+                <TextView
+                    android:id="@+id/movie_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Year: 2022" />
+
+                <TextView
+                    android:id="@+id/movie_released"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Released: 04 Mar 2022" />
+
+                <TextView
+                    android:id="@+id/movie_runtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Runtime: 176 min" />
+
+                <TextView
+                    android:id="@+id/movie_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Genre: Action, Crime, Drama" />
+
+                <TextView
+                    android:id="@+id/movie_director"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Director: Matt Reeves" />
+
+                <TextView
+                    android:id="@+id/movie_writer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Writer: ... " />
+
+                <TextView
+                    android:id="@+id/movie_actors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Actors: ... " />
+
+                <TextView
+                    android:id="@+id/movie_plot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:textColor="@color/app_text_primary"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="2dp"
+                    tools:text="Plot: (long description here...)" />
+
+                <TextView
+                    android:id="@+id/movie_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_m"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Language: English" />
+
+                <TextView
+                    android:id="@+id/movie_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Country: USA" />
+
+                <TextView
+                    android:id="@+id/movie_awards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Awards: ..." />
+
+                <TextView
+                    android:id="@+id/movie_imdb_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="IMDb Rating: 7.8" />
+
+                <TextView
+                    android:id="@+id/movie_imdb_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="IMDb ID: tt1877830" />
+
+                <TextView
+                    android:id="@+id/movie_boxoffice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_text_secondary"
+                    android:textSize="14sp"
+                    tools:text="Box Office: $770,000,000" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_m"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back_btn"
+                style="@style/AppButton.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/action_back" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_s"
+                android:layout_weight="1"
+                android:text="@string/action_add_to_my_list" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
