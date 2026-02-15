@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Movies</string>
+    <string name="app_name">Movie Kotlist</string>
 
     <!-- Screen titles -->
     <string name="title_all_movies">Movies</string>

@@ -72,13 +72,23 @@ class AddMovieFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.scoreInput.filters = arrayOf(android.text.InputFilter { source, start, end, dest, dstart, dend ->
+            val newText = dest.toString()
+                .substring(0, dstart) + source.subSequence(start, end) + dest.toString().substring(dend)
+
+            if (newText.isBlank()) return@InputFilter null
+
+            val value = newText.toIntOrNull() ?: return@InputFilter ""
+            if (value in 1..10) null else ""
+        })
+
         return binding.root
     }
 
     private fun showWatchedDatePicker() {
         val now = Calendar.getInstance()
 
-        DatePickerDialog(
+        val picker = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
                 val chosen = Calendar.getInstance().apply {
@@ -92,13 +102,17 @@ class AddMovieFragment : Fragment() {
                 }
 
                 selectedWatchedDateMillis = chosen.timeInMillis
-
                 binding.datePickerEdittext.setText("${dayOfMonth}/${month + 1}/$year")
             },
             now.get(Calendar.YEAR),
             now.get(Calendar.MONTH),
             now.get(Calendar.DAY_OF_MONTH)
-        ).show()
+        )
+
+        picker.datePicker.maxDate = System.currentTimeMillis()
+
+        picker.show()
+
     }
 
     private fun onSaveClicked() {
