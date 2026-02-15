@@ -1,12 +1,16 @@
 package com.example.myapplicationsapir.ui.main
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -19,6 +23,16 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
+
+    private val requestNotifPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted: Boolean ->
+            if (granted) {
+                scheduleRateReminder()
+            } else {
+                showNotificationsDeniedDialog()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,36 +44,66 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        requestNotificationPermissionIfNeeded()
-        scheduleRateReminder()
+        // Use the new flow only
+        ensureNotificationPermissionThenSchedule()
+    }
+
+    private fun ensureNotificationPermissionThenSchedule() {
+        // Android 12 and below: no runtime permission needed
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            scheduleRateReminder()
+            return
+        }
+
+        val granted = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+
+        if (granted) {
+            scheduleRateReminder()
+        } else {
+            showNotificationsRationaleDialog()
+        }
+    }
+
+    private fun showNotificationsRationaleDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Enable notifications?")
+            .setMessage("We use notifications to remind you to rate movies you added without a rating.")
+            .setPositiveButton("Allow") { _, _ ->
+                // we only call it on API 33+
+                requestNotifPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+            .setNegativeButton("Not now", null)
+            .show()
+    }
+
+    private fun showNotificationsDeniedDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Notifications are off")
+            .setMessage("To get rating reminders, enable notifications in Settings.")
+            .setPositiveButton("Open Settings") { _, _ ->
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", packageName, null)
+                }
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun scheduleRateReminder() {
-        val request = PeriodicWorkRequestBuilder<RateReminderWorker>(
-            15, TimeUnit.MINUTES // WorkManager minimum
-        ).build()
+
+        val request = PeriodicWorkRequestBuilder<RateReminderWorker>(1, TimeUnit.DAYS)
+            .setInitialDelay(1, TimeUnit.DAYS)
+            .build()
+
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
             "rate_reminder_work",
             ExistingPeriodicWorkPolicy.UPDATE,
             request
         )
-    }
-
-    private fun requestNotificationPermissionIfNeeded() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val granted = ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED
-
-            if (!granted) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                    200
-                )
-            }
-        }
     }
 }
