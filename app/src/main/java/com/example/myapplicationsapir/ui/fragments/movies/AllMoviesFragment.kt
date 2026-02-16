@@ -18,6 +18,9 @@ import com.example.myapplicationsapir.databinding.FragmentAllMoviesBinding
 import com.example.myapplicationsapir.ui.fragments.movies.adapter.MovieAdapter
 import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
 import com.example.myapplicationsapir.viewmodel.factory.MovieViewModelFactoryProvider
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.myapplicationsapir.advanced.RateReminderWorker
 
 class AllMoviesFragment : Fragment() {
 
@@ -47,6 +50,10 @@ class AllMoviesFragment : Fragment() {
 
         binding.favoritesBtn.setOnClickListener {
             findNavController().navigate(R.id.action_allMoviesFragment_to_favoriteMoviesFragment)
+        }
+        binding.btnTestReminder.setOnClickListener {
+            val request = OneTimeWorkRequestBuilder<RateReminderWorker>().build()
+            WorkManager.getInstance(requireContext()).enqueue(request)
         }
 
         return binding.root

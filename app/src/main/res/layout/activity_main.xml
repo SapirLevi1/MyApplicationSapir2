@@ -19,20 +19,7 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/movies_navgraph" />
 
-    <Button
-        android:id="@+id/btnTestReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_margin="16dp"
-        android:elevation="10dp"
-        android:text="Test Reminder"
-        android:textSize="12sp"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 

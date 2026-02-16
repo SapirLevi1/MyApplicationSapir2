@@ -20,9 +20,8 @@ import androidx.work.WorkManager
 import com.example.myapplicationsapir.R
 import com.example.myapplicationsapir.advanced.RateReminderWorker
 import java.util.concurrent.TimeUnit
-import androidx.work.OneTimeWorkRequestBuilder
 import android.widget.Button
-import androidx.work.OneTimeWorkRequestBuilder
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,9 +39,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.btnTestReminder).setOnClickListener {
-            triggerReminderNow()
-        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -113,12 +109,6 @@ class MainActivity : AppCompatActivity() {
             request
         )
     }
-    private fun triggerReminderNow() {
 
-        val request = OneTimeWorkRequestBuilder<RateReminderWorker>()
-            .build()
-
-        WorkManager.getInstance(this).enqueue(request)
-    }
 
 }
