@@ -12,12 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviekotlist.R
-import com.example.moviekotlist.data.local.entity.MovieEntity
-import com.example.moviekotlist.databinding.FragmentAllMoviesBinding
-import com.example.moviekotlist.ui.fragments.movies.adapter.MovieAdapter
-import com.example.moviekotlist.viewmodel.movies.MoviesViewModel
-import com.example.moviekotlist.viewmodel.factory.MovieViewModelFactoryProvider
+import com.example.myapplicationsapir.R
+import com.example.myapplicationsapir.data.local.entity.MovieEntity
+import com.example.myapplicationsapir.databinding.FragmentAllMoviesBinding
+import com.example.myapplicationsapir.ui.fragments.movies.adapter.MovieAdapter
+import com.example.myapplicationsapir.viewmodel.movies.MoviesViewModel
+import com.example.myapplicationsapir.viewmodel.factory.MovieViewModelFactoryProvider
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.myapplicationsapir.advanced.RateReminderWorker
 
 class AllMoviesFragment : Fragment() {
 
@@ -47,6 +50,10 @@ class AllMoviesFragment : Fragment() {
 
         binding.favoritesBtn.setOnClickListener {
             findNavController().navigate(R.id.action_allMoviesFragment_to_favoriteMoviesFragment)
+        }
+        binding.btnTestReminder.setOnClickListener {
+            val request = OneTimeWorkRequestBuilder<RateReminderWorker>().build()
+            WorkManager.getInstance(requireContext()).enqueue(request)
         }
 
         return binding.root
