@@ -1,0 +1,168 @@
+package com.example.moviekotlist.ui.fragments.movies
+
+import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.moviekotlist.R
+import com.example.moviekotlist.data.local.entity.MovieEntity
+import com.example.moviekotlist.databinding.FragmentAddMovieBinding
+import com.example.moviekotlist.viewmodel.movies.MoviesViewModel
+import com.example.moviekotlist.viewmodel.factory.MovieViewModelFactoryProvider
+import com.example.moviekotlist.viewmodel.model.SaveMovieResult
+
+import java.util.Calendar
+
+class AddMovieFragment : Fragment() {
+
+    private var _binding: FragmentAddMovieBinding? = null
+    private val binding get() = _binding!!
+
+    private var imageUri: Uri? = null
+    private var selectedWatchedDateMillis: Long? = null
+
+    private val moviesViewModel: MoviesViewModel by viewModels {
+        MovieViewModelFactoryProvider.getFactory(requireContext())
+    }
+    private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            if (uri != null) {
+                binding.resultImage.setImageURI(uri)
+                requireActivity().contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                imageUri = uri
+            }
+        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentAddMovieBinding.inflate(inflater, container, false)
+
+        binding.datePickerEdittext.setOnClickListener {
+            showWatchedDatePicker()
+        }
+
+        binding.datePickerLayout.setOnClickListener {
+            showWatchedDatePicker()
+        }
+
+        binding.imageBtn.setOnClickListener {
+            pickImageLauncher.launch(arrayOf("image/*"))
+        }
+
+        binding.finishBtn.setOnClickListener {
+            onSaveClicked()
+        }
+
+        binding.cancelBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.scoreInput.filters = arrayOf(android.text.InputFilter { source, start, end, dest, dstart, dend ->
+            val newText = dest.toString()
+                .substring(0, dstart) + source.subSequence(start, end) + dest.toString().substring(dend)
+
+            if (newText.isBlank()) return@InputFilter null
+
+            val value = newText.toIntOrNull() ?: return@InputFilter ""
+            if (value in 1..10) null else ""
+        })
+
+        return binding.root
+    }
+
+    private fun showWatchedDatePicker() {
+        val now = Calendar.getInstance()
+
+        val picker = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                val chosen = Calendar.getInstance().apply {
+                    set(Calendar.YEAR, year)
+                    set(Calendar.MONTH, month)
+                    set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+
+                selectedWatchedDateMillis = chosen.timeInMillis
+                binding.datePickerEdittext.setText("${dayOfMonth}/${month + 1}/$year")
+            },
+            now.get(Calendar.YEAR),
+            now.get(Calendar.MONTH),
+            now.get(Calendar.DAY_OF_MONTH)
+        )
+
+        picker.datePicker.maxDate = System.currentTimeMillis()
+
+        picker.show()
+
+    }
+
+    private fun onSaveClicked() {
+        val title = binding.movieTitle.text.toString().trim()
+        val desc = binding.movieDescription.text.toString().trim()
+        val scoreStr = binding.scoreInput.text.toString().trim()
+        val watchedMillis = selectedWatchedDateMillis
+
+        if (title.isEmpty()) {
+            binding.movieTitle.error = getString(R.string.error_title_required)
+            return
+        }
+
+        val now = System.currentTimeMillis()
+        if (watchedMillis != null && watchedMillis > now) {
+            val msg = getString(R.string.error_watched_date_future)
+            binding.datePickerEdittext.error = msg
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val score = scoreStr.toIntOrNull()
+        if (score != null && score !in 1..10) {
+            binding.scoreInput.error = getString(R.string.error_score_range)
+            return
+        }
+
+        val movie = MovieEntity(
+            title = title,
+            description = desc,
+            imageUri = imageUri?.toString(),
+            watchedDate = watchedMillis,
+            score = score
+        )
+
+        moviesViewModel.addMovieWithValidation(movie) { result ->
+            when (result) {
+                is SaveMovieResult.Success -> {
+                    findNavController().navigate(R.id.action_addMovieFragment_to_allMoviesFragment)
+                }
+
+                is SaveMovieResult.Error -> {
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

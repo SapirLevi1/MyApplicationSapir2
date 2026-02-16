@@ -16,7 +16,7 @@
         android:text="@string/title_add_movie"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@color/app_main_title"
+        android:textColor="@color/app_text_primary"
         android:gravity="start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">הסרטים שלי</string>
+    <string name="app_name">רשימת סרקוטלין</string>
 
     <!-- Screen titles -->
     <string name="title_all_movies">סרטים</string>

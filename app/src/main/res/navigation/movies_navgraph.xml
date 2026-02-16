@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/allMoviesFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.AllMoviesFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.AllMoviesFragment"
         android:label="all_movies_layout"
         tools:layout="@layout/fragment_all_movies" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMovieFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.AddMovieFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.AddMovieFragment"
         android:label="add_movie_layout"
         tools:layout="@layout/fragment_add_movie" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailMovieFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.DetailsMovieFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.DetailsMovieFragment"
         android:label="detail_movie_layout"
         tools:layout="@layout/fragment_details_movie">
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/editMovieFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.EditMovieFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.EditMovieFragment"
         android:label="Edit Movie">
         <argument
             android:name="movieId"
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteMoviesFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.FavoriteMoviesFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.FavoriteMoviesFragment"
         android:label="@string/title_favorite_movies"
         tools:layout="@layout/fragment_favorite_movies">
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/OMDBFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.OMDBFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.OMDBFragment"
         android:label="@string/title_omdb"
         tools:layout="@layout/fragment_omdb">
 
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsMovieAPIFragment"
-        android:name="com.example.myapplicationsapir.ui.fragments.movies.DetailsMovieAPIFragment"
+        android:name="com.example.moviekotlist.ui.fragments.movies.DetailsMovieAPIFragment"
         android:label="title_movie_details"
         tools:layout="@layout/fragment_details_movie_api">
     </fragment>
