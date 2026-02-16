@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.MyApplicationSapir" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MovieKotlist" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/app_primary</item>
         <item name="colorPrimaryVariant">@color/app_primary</item>
         <item name="colorOnPrimary">@color/app_on_primary</item>

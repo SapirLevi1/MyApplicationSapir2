@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Application Sapir"
+rootProject.name = "Movie Kotlist"
 include(":app")
  

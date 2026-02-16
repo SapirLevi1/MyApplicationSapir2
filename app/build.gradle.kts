@@ -14,7 +14,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplicationsapir"
+    namespace = "com.example.moviekotlist"
     compileSdk {
         version = release(36)
     }
@@ -25,7 +25,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.myapplicationsapir"
+        applicationId = "com.example.moviekotlist"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
