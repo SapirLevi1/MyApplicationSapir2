@@ -2,14 +2,19 @@
 <resources>
     <color name="app_primary">#4F46E5</color>
     <color name="app_on_primary">#FFFFFF</color>
+
     <color name="app_secondary">#06B6D4</color>
     <color name="app_on_secondary">#06242B</color>
+
     <color name="app_background">#F8FAFC</color>
     <color name="app_surface">#FFFFFF</color>
     <color name="app_surface_variant">#EEF2F7</color>
     <color name="app_outline">#D1D5DB</color>
+
     <color name="app_text_primary">#111827</color>
     <color name="app_text_secondary">#6B7280</color>
+    <color name="app_main_title">#111827</color>
+
     <color name="app_rating_bg">#EEF2FF</color>
     <color name="app_rating_text">#3730A3</color>
 </resources>
