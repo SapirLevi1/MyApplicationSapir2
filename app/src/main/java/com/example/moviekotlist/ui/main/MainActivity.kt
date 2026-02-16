@@ -20,6 +20,9 @@ import androidx.work.WorkManager
 import com.example.moviekotlist.R
 import com.example.moviekotlist.advanced.RateReminderWorker
 import java.util.concurrent.TimeUnit
+import androidx.work.OneTimeWorkRequestBuilder
+import android.widget.Button
+import androidx.work.OneTimeWorkRequestBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        findViewById<Button>(R.id.btnTestReminder).setOnClickListener {
+            triggerReminderNow()
+        }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -94,11 +101,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun scheduleRateReminder() {
+        WorkManager.getInstance(this).cancelUniqueWork("rate_reminder_work")
 
         val request = PeriodicWorkRequestBuilder<RateReminderWorker>(1, TimeUnit.DAYS)
             .setInitialDelay(1, TimeUnit.DAYS)
             .build()
-
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
             "rate_reminder_work",
@@ -106,4 +113,12 @@ class MainActivity : AppCompatActivity() {
             request
         )
     }
+    private fun triggerReminderNow() {
+
+        val request = OneTimeWorkRequestBuilder<RateReminderWorker>()
+            .build()
+
+        WorkManager.getInstance(this).enqueue(request)
+    }
+
 }
